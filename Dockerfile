@@ -1,13 +1,17 @@
-FROM node:14.14.0-alpine3.12
+FROM node:14.14.0-alpine3.12 
 
 COPY . ./app
-
 WORKDIR /app
+RUN npm config set registry https://registry.npmjs.org/
 
-RUN npm install
+RUN npm config set proxy null
+RUN npm config set https-proxy null
+
+RUN npm prune
+RUN npm install --quiet
 
 EXPOSE 8080
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
-CMD ["npm", "run", "start"]
+ENTRYPOINT ["npm", "run", "start"]

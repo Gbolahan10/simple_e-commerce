@@ -4,7 +4,7 @@
   "description": "A simple RESTful API to create and manage products in a store",
   "main": "app.ts",
   "scripts": {
-    "start": "node dist/app.js",
+    "start": "cross-env NODE_ENV=production node dist/app.js",
     "build": "tsc && tsc-alias",
     "dev": "cross-env NODE_ENV=development nodemon",
     "tests": "DOTENV_CONFIG_PATH=.env.test jest --setupFiles dotenv/config --detectOpenHandles"
