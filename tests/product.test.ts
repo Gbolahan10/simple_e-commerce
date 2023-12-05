@@ -51,7 +51,7 @@ describe('ProductsController', () => {
       currency: 'USD',
       store_id: 'user_id',
     });
-    expect(next).toHaveBeenCalledWith(new HttpException(300, 'Error uploading product - db error'));
+    expect(next).toHaveBeenCalledWith(new HttpException(500, 'Error uploading product - db error'));
 
   })
 
@@ -161,7 +161,7 @@ describe('ProductsController', () => {
       _id: 'exampleProductId',
       store_id: 'user_id',
     });
-    expect(next).toHaveBeenCalledWith(new HttpException(404, expectedError));
+    expect(next).toHaveBeenCalledWith(new HttpException(504, expectedError));
     expect(res.status).not.toHaveBeenCalled();
     expect(res.json).not.toHaveBeenCalled();
   });
@@ -201,7 +201,7 @@ describe('ProductsController', () => {
       _id: 'exampleProductId',
       store_id: 'user_id',
     }, { name: 'Updated Product', description: 'Updated Description' });
-    expect(next).toHaveBeenCalledWith(new HttpException(404, expectedError));
+    expect(next).toHaveBeenCalledWith(new HttpException(500, expectedError));
     expect(res.status).not.toHaveBeenCalled();
     expect(res.json).not.toHaveBeenCalled();
   });

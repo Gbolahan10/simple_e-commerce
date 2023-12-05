@@ -24,7 +24,7 @@ class ProductsController {
 
             const productCreated = await this.productService.create(data)
 
-            if (!productCreated.status) { throw new HttpException(300, `Error uploading product - ${productCreated.error}`)}
+            if (!productCreated.status) { throw new HttpException(500, `Error uploading product - ${productCreated.error}`)}
             
             res.status(201).json({data: productCreated.result, message: "success"});
 
@@ -75,7 +75,7 @@ class ProductsController {
 
             const productDeleted = await this.productService.delete({store_id: _id, _id: product_id})
 
-            if (!productDeleted.status) { throw new HttpException(300, productDeleted.error)}
+            if (!productDeleted.status) { throw new HttpException(500, productDeleted.error)}
             
             res.status(200).json({message: "Product removed successfully"});
 
@@ -92,7 +92,7 @@ class ProductsController {
 
             const productUpdated = await this.productService.update({store_id: _id, _id: product_id}, { ...data })
 
-            if (!productUpdated.status) { throw new HttpException(300, productUpdated.error)}
+            if (!productUpdated.status) { throw new HttpException(500, productUpdated.error)}
             
             res.status(200).json({message: "Product updated successfully"});
 
