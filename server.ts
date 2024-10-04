@@ -5,32 +5,35 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
-import { NODE_ENV, PORT, DATABASE_URL, ORIGIN, CREDENTIALS } from './src/config/index';
+import morgan from 'morgan';
+import { NODE_ENV, PORT, DATABASE_URL, ORIGIN, CREDENTIALS, LOG_FORMAT } from './src/config/index';
 import { Routes } from './src/interfaces/routes.interface';
 import errorMiddleware from './src/middlewares/error.middleware';
+import { logger, stream } from './src/utils/helpers/logger';
 
 class App {
   public app: express.Application;
   public env: string;
+  public port: string | number;
 
   constructor(routes: Routes[]) {
     this.app = express();
     this.env = NODE_ENV || 'development';
+    this.port = PORT || 8000;
 
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
     this.initializeErrorHandling();
   }
-
-  // Mongoose connection setup (no need to listen on a port)
-  public async connectToDatabase() {
-    try {
-      await mongoose.connect(DATABASE_URL);
-      mongoose.Promise = global.Promise;
-      console.log('🚀 Successfully connected to the database');
-    } catch (error) {
-      console.error('❌ Error connecting to the database:', error);
-    }
+  public listen() {
+    mongoose.connect(DATABASE_URL);
+    mongoose.Promise = global.Promise;
+    this.app.listen(this.port, () => {
+      logger.info(`=================================`);
+      logger.info(`======= ENV: ${this.env} =======`);
+      logger.info(`🚀 App listening on the port ${this.port}`);
+      logger.info(`=================================`);
+    });
   }
 
   public getServer() {
@@ -38,6 +41,7 @@ class App {
   }
 
   private initializeMiddlewares() {
+    this.app.use(morgan(LOG_FORMAT, { stream }));
     this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
     this.app.use(hpp());
     this.app.use(helmet());
@@ -49,6 +53,7 @@ class App {
 
   private initializeRoutes(routes: Routes[]) {
     routes.forEach(route => {
+      this.app.use('/test/', route.router);
       this.app.use('/', route.router);
     });
   }

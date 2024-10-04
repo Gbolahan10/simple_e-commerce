@@ -6,15 +6,12 @@ import validateEnv from './src/utils/helpers/validateEnv';
 
 validateEnv();
 
-// Initialize the app with routes
 const app = new App([
   new IndexRoute(),
   new AuthRoute(),
   new ProductsRoute(),
 ]);
 
-// Connect to database
-app.connectToDatabase();
+app.listen();
 
-// Export the app for Vercel (do not call app.listen)
-export default app.getServer();
+export default app
