@@ -30,11 +30,11 @@ class App {
     mongoose.connect(DATABASE_URL);
     mongoose.Promise = global.Promise;
     // this.app.listen(this.port, () => {
-      console.log(`=================================`);
-      console.log(`======= ENV: ${this.env} =======`);
-      console.log(`🚀 App listening on the port ${this.port}`);
-      console.log(`=================================`);
-    });
+    //   logger.info(`=================================`);
+    //   logger.info(`======= ENV: ${this.env} =======`);
+    //   logger.info(`🚀 App listening on the port ${this.port}`);
+    //   logger.info(`=================================`);
+    // });
   }
 
   public getServer() {
