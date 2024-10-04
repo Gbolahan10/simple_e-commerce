@@ -12,6 +12,6 @@ const app = new App([
   new ProductsRoute(),
 ]);
 
-app.listen();
+// app.listen();
 
 export default app

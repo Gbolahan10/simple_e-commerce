@@ -12,6 +12,6 @@ const app = new server_1.default([
     new authentication_route_1.default(),
     new products_route_1.default(),
 ]);
-app.listen();
+// app.listen();
 exports.default = app;
 //# sourceMappingURL=app.js.map
