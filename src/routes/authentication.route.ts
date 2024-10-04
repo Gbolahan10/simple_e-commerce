@@ -3,7 +3,7 @@ import AuthController from '../controllers/auth.controller';
 import { CreateUserDto, AuthUserDto } from '../dtos/users.dtos';
 import { Routes } from '../interfaces/routes.interface';
 //import authMiddleware from '@middlewares/auth.middleware';
-import validationMiddleware from '../middlewares/validation.middleware';
+import {validationMiddleware} from '../middlewares/validation.middleware';
 
 class AuthRoute implements Routes {
   public path = '/auth/';
