@@ -7,7 +7,7 @@ class DatabaseService {
     async create(payload) {
         try {
             const result = await this.Model.create(payload);
-            return { status: true, result };
+            return { status: true, result: result.toObject() };
         }
         catch (error) {
             return { status: false, error };
@@ -17,7 +17,7 @@ class DatabaseService {
         try {
             const result = await this.Model.findOne(query);
             if (result) {
-                return { status: true, result };
+                return { status: true, result: result.toObject() };
             }
             else if (!result) {
                 return { status: false, result };

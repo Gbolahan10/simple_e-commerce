@@ -47,7 +47,7 @@ class App {
     }
     initializeRoutes(routes) {
         routes.forEach(route => {
-            this.app.use('/test/', route.router);
+            this.app.use('/', route.router);
         });
     }
     initializeErrorHandling() {

@@ -33,6 +33,7 @@ class AuthController {
                     if (!createUserResponse.status)
                         throw new HttpException_1.HttpException(409, createUserResponse.error);
                     const user = createUserResponse.result;
+                    delete user.password;
                     res.status(201).json({ data: { user }, message: 'Account created successfully.' });
                 }
                 else {
@@ -54,6 +55,7 @@ class AuthController {
                         throw new HttpException_1.HttpException(401, 'Password Incorrect');
                     }
                     const { createdAt, expiresAt, expiresIn, token } = await this.authService.createToken(findUserResponse.result, index_1.SECRET_KEY, 500);
+                    delete user.password;
                     res.status(200).json({ data: { user, token, createdAt, expiresAt, expiresIn }, message: 'Login successful' });
                 }
                 else {
