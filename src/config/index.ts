@@ -12,4 +12,3 @@ export const LOG_FORMAT = process.env.LOG_FORMAT as string;
 export const ORIGIN = process.env.ORIGIN as string;
 export const LOG_DIR = process.env.LOG_DIR as string;
 export const SECRET_KEY = process.env.SECRET_KEY as string;
-ex
