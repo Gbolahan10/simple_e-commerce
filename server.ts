@@ -29,7 +29,7 @@ class App {
     // Set up Mongoose
     mongoose.connect(DATABASE_URL);
     mongoose.Promise = global.Promise;
-    this.app.listen(this.port, () => {
+    // this.app.listen(this.port, () => {
       console.log(`=================================`);
       console.log(`======= ENV: ${this.env} =======`);
       console.log(`🚀 App listening on the port ${this.port}`);

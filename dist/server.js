@@ -24,34 +24,38 @@ class App {
         // Set up Mongoose
         mongoose_1.default.connect(index_1.DATABASE_URL);
         mongoose_1.default.Promise = global.Promise;
-        this.app.listen(this.port, () => {
-            console.log(`=================================`);
-            console.log(`======= ENV: ${this.env} =======`);
-            console.log(`🚀 App listening on the port ${this.port}`);
-            console.log(`=================================`);
-        });
+        // this.app.listen(this.port, () => {
+        console.log(`=================================`);
+        console.log(`======= ENV: ${this.env} =======`);
+        console.log(`🚀 App listening on the port ${this.port}`);
+        console.log(`=================================`);
     }
-    getServer() {
-        return this.app;
-    }
-    initializeMiddlewares() {
-        // this.app.use(morgan(LOG_FORMAT, { stream }));
-        this.app.use((0, cors_1.default)({ origin: index_1.ORIGIN, credentials: index_1.CREDENTIALS }));
-        this.app.use((0, hpp_1.default)());
-        this.app.use((0, helmet_1.default)());
-        this.app.use((0, compression_1.default)());
-        this.app.use(express_1.default.json());
-        this.app.use(express_1.default.urlencoded({ extended: true }));
-        this.app.use((0, cookie_parser_1.default)());
-    }
-    initializeRoutes(routes) {
-        routes.forEach(route => {
-            this.app.use('/', route.router);
-        });
-    }
-    initializeErrorHandling() {
-        this.app.use(error_middleware_1.default);
-    }
+    ;
+}
+getServer();
+{
+    return this.app;
+}
+initializeMiddlewares();
+{
+    // this.app.use(morgan(LOG_FORMAT, { stream }));
+    this.app.use((0, cors_1.default)({ origin: index_1.ORIGIN, credentials: index_1.CREDENTIALS }));
+    this.app.use((0, hpp_1.default)());
+    this.app.use((0, helmet_1.default)());
+    this.app.use((0, compression_1.default)());
+    this.app.use(express_1.default.json());
+    this.app.use(express_1.default.urlencoded({ extended: true }));
+    this.app.use((0, cookie_parser_1.default)());
+}
+initializeRoutes(routes, routes_interface_1.Routes[]);
+{
+    routes.forEach(route => {
+        this.app.use('/', route.router);
+    });
+}
+initializeErrorHandling();
+{
+    this.app.use(error_middleware_1.default);
 }
 exports.default = App;
 //# sourceMappingURL=server.js.map

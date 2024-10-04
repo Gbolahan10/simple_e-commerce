@@ -6,9 +6,5 @@ declare class App {
     port: string | number;
     constructor(routes: Routes[]);
     listen(): void;
-    getServer(): express.Application;
-    private initializeMiddlewares;
-    private initializeRoutes;
-    private initializeErrorHandling;
 }
 export default App;
