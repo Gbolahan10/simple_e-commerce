@@ -9,7 +9,7 @@ import morgan from 'morgan';
 import { NODE_ENV, PORT, DATABASE_URL, ORIGIN, CREDENTIALS, LOG_FORMAT } from './src/config/index';
 import { Routes } from './src/interfaces/routes.interface';
 import errorMiddleware from './src/middlewares/error.middleware';
-import { logger, stream } from './src/utils/helpers/logger';
+// import { logger, stream } from './src/utils/helpers/logger';
 
 class App {
   public app: express.Application;
@@ -30,10 +30,10 @@ class App {
     mongoose.connect(DATABASE_URL);
     mongoose.Promise = global.Promise;
     this.app.listen(this.port, () => {
-      logger.info(`=================================`);
-      logger.info(`======= ENV: ${this.env} =======`);
-      logger.info(`🚀 App listening on the port ${this.port}`);
-      logger.info(`=================================`);
+      console.log(`=================================`);
+      console.log(`======= ENV: ${this.env} =======`);
+      console.log(`🚀 App listening on the port ${this.port}`);
+      console.log(`=================================`);
     });
   }
 
@@ -42,7 +42,7 @@ class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(morgan(LOG_FORMAT, { stream }));
+    // this.app.use(morgan(LOG_FORMAT, { stream }));
     this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
     this.app.use(hpp());
     this.app.use(helmet());

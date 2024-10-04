@@ -1,4 +1,3 @@
-export declare const path: string;
 export declare const CREDENTIALS: boolean;
 export declare const NODE_ENV: string;
 export declare const PORT: number;

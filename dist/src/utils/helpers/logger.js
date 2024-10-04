@@ -1,59 +1,59 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.stream = exports.logger = void 0;
-const tslib_1 = require("tslib");
-const fs_1 = require("fs");
-const path_1 = require("path");
-const winston_1 = tslib_1.__importDefault(require("winston"));
-const winston_daily_rotate_file_1 = tslib_1.__importDefault(require("winston-daily-rotate-file"));
-const config_1 = require("../../config");
-// logs dir
-const logDir = (0, path_1.join)(__dirname, config_1.LOG_DIR);
-if (!(0, fs_1.existsSync)(logDir) && config_1.path === '.env.development') {
-    (0, fs_1.mkdirSync)(logDir);
-}
-// Define log format
-const logFormat = winston_1.default.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);
-/*
- * Log Level
- * error: 0, warn: 1, info: 2, http: 3, verbose: 4, debug: 5, silly: 6
- */
-const logger = winston_1.default.createLogger({
-    format: winston_1.default.format.combine(winston_1.default.format.timestamp({
-        format: 'YYYY-MM-DD HH:mm:ss',
-    }), logFormat),
-    transports: [
-        // debug log setting
-        new winston_daily_rotate_file_1.default({
-            level: 'debug',
-            datePattern: 'YYYY-MM-DD',
-            dirname: logDir + '/debug',
-            filename: `%DATE%.log`,
-            maxFiles: 30,
-            json: false,
-            zippedArchive: true,
-        }),
-        // error log setting
-        new winston_daily_rotate_file_1.default({
-            level: 'error',
-            datePattern: 'YYYY-MM-DD',
-            dirname: logDir + '/error',
-            filename: `%DATE%.log`,
-            maxFiles: 30,
-            handleExceptions: true,
-            json: false,
-            zippedArchive: true,
-        }),
-    ],
-});
-exports.logger = logger;
-logger.add(new winston_1.default.transports.Console({
-    format: winston_1.default.format.combine(winston_1.default.format.splat(), winston_1.default.format.colorize()),
-}));
-const stream = {
-    write: (message) => {
-        logger.info(message.substring(0, message.lastIndexOf('\n')));
-    },
-};
-exports.stream = stream;
+// import { existsSync, mkdirSync } from 'fs';
+// import { join } from 'path';
+// import winston from 'winston';
+// import winstonDaily from 'winston-daily-rotate-file';
+// import { LOG_DIR, path } from '../../config';
+// // logs dir
+// const logDir: string = join(__dirname, LOG_DIR);
+// if (!existsSync(logDir) && path === '.env.development') {
+//   mkdirSync(logDir);
+// }
+// // Define log format
+// const logFormat = winston.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);
+// /*
+//  * Log Level
+//  * error: 0, warn: 1, info: 2, http: 3, verbose: 4, debug: 5, silly: 6
+//  */
+// const logger = winston.createLogger({
+//   format: winston.format.combine(
+//     winston.format.timestamp({
+//       format: 'YYYY-MM-DD HH:mm:ss',
+//     }),
+//     logFormat,
+//   ),
+//   transports: [
+//     // debug log setting
+//     new winstonDaily({
+//       level: 'debug',
+//       datePattern: 'YYYY-MM-DD',
+//       dirname: logDir + '/debug', // log file /logs/debug/*.log in save
+//       filename: `%DATE%.log`,
+//       maxFiles: 30, // 30 Days saved
+//       json: false,
+//       zippedArchive: true,
+//     }),
+//     // error log setting
+//     new winstonDaily({
+//       level: 'error',
+//       datePattern: 'YYYY-MM-DD',
+//       dirname: logDir + '/error', // log file /logs/error/*.log in save
+//       filename: `%DATE%.log`,
+//       maxFiles: 30, // 30 Days saved
+//       handleExceptions: true,
+//       json: false,
+//       zippedArchive: true,
+//     }),
+//   ],
+// });
+// logger.add(
+//   new winston.transports.Console({
+//     format: winston.format.combine(winston.format.splat(), winston.format.colorize()),
+//   }),
+// );
+// const stream = {
+//   write: (message: string) => {
+//     logger.info(message.substring(0, message.lastIndexOf('\n')));
+//   },
+// };
+// export { logger, stream };
 //# sourceMappingURL=logger.js.map
