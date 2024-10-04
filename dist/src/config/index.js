@@ -12,5 +12,4 @@ exports.LOG_FORMAT = process.env.LOG_FORMAT;
 exports.ORIGIN = process.env.ORIGIN;
 exports.LOG_DIR = process.env.LOG_DIR;
 exports.SECRET_KEY = process.env.SECRET_KEY;
-ex;
 //# sourceMappingURL=index.js.map
