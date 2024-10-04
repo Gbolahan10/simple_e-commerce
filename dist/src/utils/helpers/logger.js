@@ -9,7 +9,7 @@ const winston_daily_rotate_file_1 = tslib_1.__importDefault(require("winston-dai
 const config_1 = require("../../config");
 // logs dir
 const logDir = (0, path_1.join)(__dirname, config_1.LOG_DIR);
-if (!(0, fs_1.existsSync)(logDir)) {
+if (!(0, fs_1.existsSync)(logDir) && config_1.path === '.env.development') {
     (0, fs_1.mkdirSync)(logDir);
 }
 // Define log format

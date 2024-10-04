@@ -1,5 +1,7 @@
 import { config } from 'dotenv';
-config({ path: `.env.${process.env.NODE_ENV || 'development'}` });
+
+export const path = `.env.${process.env.NODE_ENV || 'development'}`
+config({ path: path || 'production' });
 
 export const CREDENTIALS = process.env.CREDENTIALS === 'true';
 
@@ -10,3 +12,4 @@ export const LOG_FORMAT = process.env.LOG_FORMAT as string;
 export const ORIGIN = process.env.ORIGIN as string;
 export const LOG_DIR = process.env.LOG_DIR as string;
 export const SECRET_KEY = process.env.SECRET_KEY as string;
+ex
