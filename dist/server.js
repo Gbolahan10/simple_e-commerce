@@ -10,32 +10,29 @@ const helmet_1 = tslib_1.__importDefault(require("helmet"));
 const hpp_1 = tslib_1.__importDefault(require("hpp"));
 const index_1 = require("./src/config/index");
 const error_middleware_1 = tslib_1.__importDefault(require("./src/middlewares/error.middleware"));
-// import { logger, stream } from './src/utils/helpers/logger';
 class App {
     constructor(routes) {
         this.app = (0, express_1.default)();
         this.env = index_1.NODE_ENV || 'development';
-        this.port = index_1.PORT || 8000;
         this.initializeMiddlewares();
         this.initializeRoutes(routes);
         this.initializeErrorHandling();
     }
-    listen() {
-        // Set up Mongoose
-        mongoose_1.default.connect(index_1.DATABASE_URL);
-        mongoose_1.default.Promise = global.Promise;
-        // this.app.listen(this.port, () => {
-        //   logger.info(`=================================`);
-        //   logger.info(`======= ENV: ${this.env} =======`);
-        //   logger.info(`🚀 App listening on the port ${this.port}`);
-        //   logger.info(`=================================`);
-        // });
+    // Mongoose connection setup (no need to listen on a port)
+    async connectToDatabase() {
+        try {
+            await mongoose_1.default.connect(index_1.DATABASE_URL);
+            mongoose_1.default.Promise = global.Promise;
+            console.log('🚀 Successfully connected to the database');
+        }
+        catch (error) {
+            console.error('❌ Error connecting to the database:', error);
+        }
     }
     getServer() {
         return this.app;
     }
     initializeMiddlewares() {
-        // this.app.use(morgan(LOG_FORMAT, { stream }));
         this.app.use((0, cors_1.default)({ origin: index_1.ORIGIN, credentials: index_1.CREDENTIALS }));
         this.app.use((0, hpp_1.default)());
         this.app.use((0, helmet_1.default)());

@@ -1,3 +1,3 @@
-import App from './server';
-declare const app: App;
-export default app;
+/// <reference types="express" />
+declare const _default: import("express").Application;
+export default _default;
