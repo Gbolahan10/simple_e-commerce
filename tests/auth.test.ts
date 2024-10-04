@@ -48,7 +48,6 @@ describe('AuthenticationController', () => {
             user: {
                 _id: 'userId',
                 email: 'test@gmail.com',
-                password: "hashedPassword",
             },
             token: 'generatedToken',
             createdAt: expect.any(Date),
