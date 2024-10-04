@@ -16,7 +16,7 @@
       "@/(.*)": "<rootDir>/src/$1"
     },
     "collectCoverage": true
-  },  
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Gbolahan10/mainstack-backend-test.git"
